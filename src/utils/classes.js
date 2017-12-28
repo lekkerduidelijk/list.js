@@ -11,12 +11,6 @@ var index = require('./index-of');
 var re = /\s+/;
 
 /**
- * toString reference.
- */
-
-var toString = Object.prototype.toString;
-
-/**
  * Wrap `el` in a `ClassList`.
  *
  * @param {Element} el
@@ -24,7 +18,7 @@ var toString = Object.prototype.toString;
  * @api public
  */
 
-module.exports = function(el){
+module.exports = function(el) {
   return new ClassList(el);
 };
 
@@ -51,7 +45,7 @@ function ClassList(el) {
  * @api public
  */
 
-ClassList.prototype.add = function(name){
+ClassList.prototype.add = function(name) {
   // classList
   if (this.list) {
     this.list.add(name);
@@ -76,7 +70,7 @@ ClassList.prototype.add = function(name){
  * @api public
  */
 
-ClassList.prototype.remove = function(name){
+ClassList.prototype.remove = function(name) {
   // classList
   if (this.list) {
     this.list.remove(name);
@@ -91,7 +85,6 @@ ClassList.prototype.remove = function(name){
   return this;
 };
 
-
 /**
  * Toggle class `name`, can force state via `force`.
  *
@@ -104,10 +97,10 @@ ClassList.prototype.remove = function(name){
  * @api public
  */
 
-ClassList.prototype.toggle = function(name, force){
+ClassList.prototype.toggle = function(name, force) {
   // classList
   if (this.list) {
-    if ("undefined" !== typeof force) {
+    if ('undefined' !== typeof force) {
       if (force !== this.list.toggle(name, force)) {
         this.list.toggle(name); // toggle again to correct
       }
@@ -118,7 +111,7 @@ ClassList.prototype.toggle = function(name, force){
   }
 
   // fallback
-  if ("undefined" !== typeof force) {
+  if ('undefined' !== typeof force) {
     if (!force) {
       this.remove(name);
     } else {
@@ -142,7 +135,7 @@ ClassList.prototype.toggle = function(name, force){
  * @api public
  */
 
-ClassList.prototype.array = function(){
+ClassList.prototype.array = function() {
   var className = this.el.getAttribute('class') || '';
   var str = className.replace(/^\s+|\s+$/g, '');
   var arr = str.split(re);
@@ -158,7 +151,6 @@ ClassList.prototype.array = function(){
  * @api public
  */
 
-ClassList.prototype.has =
-ClassList.prototype.contains = function(name){
-  return this.list ? this.list.contains(name) : !! ~index(this.array(), name);
+ClassList.prototype.has = ClassList.prototype.contains = function(name) {
+  return this.list ? this.list.contains(name) : !!~index(this.array(), name);
 };

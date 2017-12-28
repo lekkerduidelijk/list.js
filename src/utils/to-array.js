@@ -29,5 +29,5 @@ module.exports = function toArray(collection) {
 };
 
 function isArray(arr) {
-  return Object.prototype.toString.call(arr) === "[object Array]";
+  return Object.prototype.toString.call(arr) === '[object Array]';
 }

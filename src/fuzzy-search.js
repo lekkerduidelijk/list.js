@@ -1,6 +1,4 @@
-
-var classes = require('./utils/classes'),
-  events = require('./utils/events'),
+var events = require('./utils/events'),
   extend = require('./utils/extend'),
   toString = require('./utils/to-string'),
   getByClass = require('./utils/get-by-class'),
@@ -9,15 +7,16 @@ var classes = require('./utils/classes'),
 module.exports = function(list, options) {
   options = options || {};
 
-  options = extend({
-    location: 0,
-    distance: 100,
-    threshold: 0.4,
-    multiSearch: true,
-    searchClass: 'fuzzy-search'
-  }, options);
-
-
+  options = extend(
+    {
+      location: 0,
+      distance: 100,
+      threshold: 0.4,
+      multiSearch: true,
+      searchClass: 'fuzzy-search',
+    },
+    options
+  );
 
   var fuzzySearch = {
     search: function(searchString, columns) {
@@ -30,14 +29,14 @@ module.exports = function(list, options) {
     },
     item: function(item, columns, searchArguments) {
       var found = true;
-      for(var i = 0; i < searchArguments.length; i++) {
+      for (var i = 0; i < searchArguments.length; i++) {
         var foundArgument = false;
         for (var j = 0, jl = columns.length; j < jl; j++) {
           if (fuzzySearch.values(item.values(), columns[j], searchArguments[i])) {
             foundArgument = true;
           }
         }
-        if(!foundArgument) {
+        if (!foundArgument) {
           found = false;
         }
       }
@@ -52,9 +51,8 @@ module.exports = function(list, options) {
         }
       }
       return false;
-    }
+    },
   };
-
 
   events.bind(getByClass(list.listContainer, options.searchClass), 'keyup', function(e) {
     var target = e.target || e.srcElement; // IE have srcElement

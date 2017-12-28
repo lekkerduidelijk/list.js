@@ -1,5 +1,4 @@
 module.exports = function(list) {
-
   var buttons = {
     els: undefined,
     clear: function() {
@@ -10,19 +9,19 @@ module.exports = function(list) {
     },
     getOrder: function(btn) {
       var predefinedOrder = list.utils.getAttribute(btn, 'data-order');
-      if (predefinedOrder == "asc" || predefinedOrder == "desc") {
+      if (predefinedOrder == 'asc' || predefinedOrder == 'desc') {
         return predefinedOrder;
       } else if (list.utils.classes(btn).has('desc')) {
-        return "asc";
+        return 'asc';
       } else if (list.utils.classes(btn).has('asc')) {
-        return "desc";
+        return 'desc';
       } else {
-        return "asc";
+        return 'asc';
       }
     },
     getInSensitive: function(btn, options) {
       var insensitive = list.utils.getAttribute(btn, 'data-insensitive');
-      if (insensitive === "false") {
+      if (insensitive === 'false') {
         options.insensitive = false;
       } else {
         options.insensitive = true;
@@ -35,7 +34,7 @@ module.exports = function(list) {
           continue;
         }
         var predefinedOrder = list.utils.getAttribute(btn, 'data-order');
-        if (predefinedOrder == "asc" || predefinedOrder == "desc") {
+        if (predefinedOrder == 'asc' || predefinedOrder == 'desc') {
           if (predefinedOrder == options.order) {
             list.utils.classes(btn).add(options.order);
           }
@@ -43,7 +42,7 @@ module.exports = function(list) {
           list.utils.classes(btn).add(options.order);
         }
       }
-    }
+    },
   };
 
   var sort = function() {
@@ -59,19 +58,18 @@ module.exports = function(list) {
     } else {
       options = arguments[1] || options;
       options.valueName = arguments[0];
-      options.order = options.order || "asc";
-      options.insensitive = (typeof options.insensitive == "undefined") ? true : options.insensitive;
+      options.order = options.order || 'asc';
+      options.insensitive = typeof options.insensitive == 'undefined' ? true : options.insensitive;
     }
 
     buttons.clear();
     buttons.setOrder(options);
 
-
     // caseInsensitive
     // alphabet
-    var customSortFunction = (options.sortFunction || list.sortFunction || null),
-        multi = ((options.order === 'desc') ? -1 : 1),
-        sortFunction;
+    var customSortFunction = options.sortFunction || list.sortFunction || null,
+      multi = options.order === 'desc' ? -1 : 1,
+      sortFunction;
 
     if (customSortFunction) {
       sortFunction = function(itemA, itemB) {

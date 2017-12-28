@@ -10,21 +10,21 @@ var Templater = function(list) {
   };
 
   this.clearSourceItem = function(el, valueNames) {
-    for(var i = 0, il = valueNames.length; i < il; i++) {
+    for (var i = 0, il = valueNames.length; i < il; i++) {
       var elm;
       if (valueNames[i].data) {
         for (var j = 0, jl = valueNames[i].data.length; j < jl; j++) {
-          el.setAttribute('data-'+valueNames[i].data[j], '');
+          el.setAttribute('data-' + valueNames[i].data[j], '');
         }
       } else if (valueNames[i].attr && valueNames[i].name) {
         elm = list.utils.getByClass(el, valueNames[i].name, true);
         if (elm) {
-          elm.setAttribute(valueNames[i].attr, "");
+          elm.setAttribute(valueNames[i].attr, '');
         }
       } else {
         elm = list.utils.getByClass(el, valueNames[i], true);
         if (elm) {
-          elm.innerHTML = "";
+          elm.innerHTML = '';
         }
       }
       elm = undefined;
@@ -34,8 +34,7 @@ var Templater = function(list) {
 
   this.getItemSource = function(item) {
     if (item === undefined) {
-      var nodes = list.list.childNodes,
-        items = [];
+      var nodes = list.list.childNodes;
 
       for (var i = 0, il = nodes.length; i < il; i++) {
         // Only textnodes have a data attribute
@@ -47,7 +46,7 @@ var Templater = function(list) {
       var tbody = document.createElement('tbody');
       tbody.innerHTML = item;
       return tbody.firstChild;
-    } else if (item.indexOf("<") !== -1) {
+    } else if (item.indexOf('<') !== -1) {
       var div = document.createElement('div');
       div.innerHTML = item;
       return div.firstChild;
@@ -63,18 +62,18 @@ var Templater = function(list) {
   this.get = function(item, valueNames) {
     templater.create(item);
     var values = {};
-    for(var i = 0, il = valueNames.length; i < il; i++) {
+    for (var i = 0, il = valueNames.length; i < il; i++) {
       var elm;
       if (valueNames[i].data) {
         for (var j = 0, jl = valueNames[i].data.length; j < jl; j++) {
-          values[valueNames[i].data[j]] = list.utils.getAttribute(item.elm, 'data-'+valueNames[i].data[j]);
+          values[valueNames[i].data[j]] = list.utils.getAttribute(item.elm, 'data-' + valueNames[i].data[j]);
         }
       } else if (valueNames[i].attr && valueNames[i].name) {
         elm = list.utils.getByClass(item.elm, valueNames[i].name, true);
-        values[valueNames[i].name] = elm ? list.utils.getAttribute(elm, valueNames[i].attr) : "";
+        values[valueNames[i].name] = elm ? list.utils.getAttribute(elm, valueNames[i].attr) : '';
       } else {
         elm = list.utils.getByClass(item.elm, valueNames[i], true);
-        values[valueNames[i]] = elm ? elm.innerHTML : "";
+        values[valueNames[i]] = elm ? elm.innerHTML : '';
       }
       elm = undefined;
     }
@@ -101,10 +100,9 @@ var Templater = function(list) {
     var setValue = function(name, value) {
       var elm;
       var valueName = getValueName(name);
-      if (!valueName)
-        return;
+      if (!valueName) return;
       if (valueName.data) {
-        item.elm.setAttribute('data-'+valueName.data, value);
+        item.elm.setAttribute('data-' + valueName.data, value);
       } else if (valueName.attr && valueName.name) {
         elm = list.utils.getByClass(item.elm, valueName.name, true);
         if (elm) {
@@ -119,7 +117,7 @@ var Templater = function(list) {
       elm = undefined;
     };
     if (!templater.create(item)) {
-      for(var v in values) {
+      for (var v in values) {
         if (values.hasOwnProperty(v)) {
           setValue(v, values[v]);
         }
@@ -159,8 +157,7 @@ var Templater = function(list) {
   this.clear = function() {
     /* .innerHTML = ''; fucks up IE */
     if (list.list.hasChildNodes()) {
-      while (list.list.childNodes.length >= 1)
-      {
+      while (list.list.childNodes.length >= 1) {
         list.list.removeChild(list.list.firstChild);
       }
     }

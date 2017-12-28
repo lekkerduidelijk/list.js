@@ -1,5 +1,4 @@
 module.exports = function(list) {
-
   var Item = require('./item')(list);
 
   var getChildren = function(parent) {

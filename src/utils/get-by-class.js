@@ -35,9 +35,9 @@ var polyfill = function(container, className, single) {
 
   var els = container.getElementsByTagName(tag);
   var elsLen = els.length;
-  var pattern = new RegExp("(^|\\s)"+className+"(\\s|$)");
+  var pattern = new RegExp('(^|\\s)' + className + '(\\s|$)');
   for (var i = 0, j = 0; i < elsLen; i++) {
-    if ( pattern.test(els[i].className) ) {
+    if (pattern.test(els[i].className)) {
       if (single) {
         return els[i];
       } else {
